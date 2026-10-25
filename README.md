@@ -13,9 +13,9 @@ Aplicación web para descubrir, organizar y analizar literatura científica de d
 | Backend y frontend | Base funcional creada |
 | Adaptador OpenAlex | Implementado y probado |
 | Endpoint de búsqueda | Implementado y probado |
-| API de proyectos y guardado | Implementada; pendiente de PostgreSQL real |
+| API de proyectos y guardado | Implementada y verificada localmente |
 | PostgreSQL y migraciones | Configurados y verificados localmente |
-| Interfaz de búsqueda | Implementada; guardado pendiente |
+| Interfaz de búsqueda y guardado | Implementada |
 | Base de datos, matriz y CSV | Pendientes de implementación |
 | IA y alertas | Extensiones opcionales, posteriores al núcleo |
 

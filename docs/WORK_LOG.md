@@ -108,6 +108,13 @@
 - **Riesgos/bloqueos:** RFA-007 sigue pendiente de listar y retirar artículos por proyecto, aunque la persistencia y deduplicación ya están verificadas.
 - **Próxima tarea (ID):** completar la API de artículos por proyecto y conectar el guardado desde la interfaz.
 
+## 2026-10-25 — RFA-007/008: guardado conectado
+- **Objetivo:** completar el recorrido búsqueda → proyecto → guardado.
+- **Cambios/archivos:** la API ahora lista y retira artículos de un proyecto; la interfaz permite crear/seleccionar proyectos y guardar resultados de búsqueda.
+- **Evidencia y comandos de prueba:** `pytest -q` en `backend` → 10 pruebas aprobadas; `npm run lint && npm run build` en `frontend` → correcto.
+- **Riesgos/bloqueos:** falta una prueba E2E en navegador y la matriz editable/CSV para cerrar los criterios restantes.
+- **Próxima tarea (ID):** implementar la vista de matriz de literatura y exportación CSV (RFA-009).
+
 ## Plantilla para sesiones futuras
 ### AAAA-MM-DD — Sesión
 - Objetivo:

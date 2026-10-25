@@ -39,3 +39,21 @@ def save_paper_to_project(session: Session, project_id: UUID, item: PaperSearchI
     session.add(ProjectPaper(project_id=project.id, paper_id=paper.id))
     session.flush()
     return paper, True
+
+
+def list_project_papers(session: Session, project_id: UUID) -> list[Paper]:
+    if session.get(ResearchProject, project_id) is None:
+        raise ProjectNotFoundError
+    statement = select(Paper).join(ProjectPaper).where(ProjectPaper.project_id == project_id).order_by(ProjectPaper.added_at.desc())
+    return list(session.scalars(statement))
+
+
+def remove_paper_from_project(session: Session, project_id: UUID, paper_id: UUID) -> bool:
+    if session.get(ResearchProject, project_id) is None:
+        raise ProjectNotFoundError
+    link = session.get(ProjectPaper, {"project_id": project_id, "paper_id": paper_id})
+    if link is None:
+        return False
+    session.delete(link)
+    session.flush()
+    return True

@@ -1,4 +1,4 @@
-import { FormEvent, StrictMode, useState } from "react";
+import { FormEvent, StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 
 import "./styles.css";
@@ -15,6 +15,7 @@ type Paper = {
 
 type SearchResponse = { items: Paper[]; page: number; has_next: boolean; total_count: number | null };
 type ApiError = { error?: { message?: string } };
+type Project = { id: string; name: string; research_question: string | null };
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
 
@@ -23,6 +24,43 @@ function App() {
   const [results, setResults] = useState<Paper[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [selectedProjectId, setSelectedProjectId] = useState("");
+  const [projectName, setProjectName] = useState("");
+
+  useEffect(() => {
+    void loadProjects();
+  }, []);
+
+  async function loadProjects() {
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/v1/projects`);
+      if (!response.ok) return;
+      const body = (await response.json()) as Project[];
+      setProjects(body);
+      setSelectedProjectId((current) => current || body[0]?.id || "");
+    } catch {
+      // Searching remains available if the project service is not reachable.
+    }
+  }
+
+  async function createProject(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!projectName.trim()) return;
+    const response = await fetch(`${apiBaseUrl}/api/v1/projects`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: projectName.trim() }) });
+    if (!response.ok) { setError("No se pudo crear el proyecto."); return; }
+    const project = (await response.json()) as Project;
+    setProjects((current) => [project, ...current]);
+    setSelectedProjectId(project.id);
+    setProjectName("");
+  }
+
+  async function savePaper(paper: Paper) {
+    if (!selectedProjectId) { setError("Crea o selecciona un proyecto antes de guardar."); return; }
+    const response = await fetch(`${apiBaseUrl}/api/v1/projects/${selectedProjectId}/papers`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(paper) });
+    if (!response.ok) { setError("No se pudo guardar el artículo."); return; }
+    setError(null);
+  }
 
   async function search(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -67,6 +105,11 @@ function App() {
         </div>
       </form>
 
+      <section className="project-bar" aria-label="Proyecto actual">
+        <form onSubmit={createProject} className="project-create"><input value={projectName} onChange={(event) => setProjectName(event.target.value)} placeholder="Nuevo proyecto" aria-label="Nombre del nuevo proyecto" /><button type="submit">Crear proyecto</button></form>
+        <select value={selectedProjectId} onChange={(event) => setSelectedProjectId(event.target.value)} aria-label="Proyecto para guardar artículos"><option value="">Selecciona un proyecto</option>{projects.map((project) => <option key={project.id} value={project.id}>{project.name}</option>)}</select>
+      </section>
+
       {error && <p className="message error" role="alert">{error}</p>}
       {!isLoading && !error && results.length === 0 && <p className="message">Aún no hay resultados. Inicia una búsqueda para explorar publicaciones.</p>}
       <section className="results" aria-live="polite">
@@ -76,6 +119,7 @@ function App() {
             <h2>{paper.title}</h2>
             <p>{paper.abstract ?? "Resumen no disponible."}</p>
             <a href={paper.source_url} target="_blank" rel="noreferrer">Ver fuente original</a>
+            <button className="save" type="button" onClick={() => void savePaper(paper)}>Guardar en proyecto</button>
           </article>
         ))}
       </section>
