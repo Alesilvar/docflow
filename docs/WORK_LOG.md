@@ -71,6 +71,14 @@
 - **Riesgos/bloqueos:** la interfaz de búsqueda aún no consume el endpoint; OpenAlex sin clave mantiene una cuota compartida.
 - **Próxima tarea (ID):** RFA-006 — esquema y migraciones PostgreSQL.
 
+## 2026-10-25 — RFA-006: esquema inicial en curso
+- **Objetivo:** modelar la persistencia base para proyectos, artículos y sus relaciones.
+- **Cambios/archivos:** añadidos modelos SQLAlchemy, Alembic, migración inicial PostgreSQL, `docker-compose.yml` y configuración de conexión de ejemplo.
+- **Evidencia y comandos de prueba:** `pytest -q` en `backend` → 8 pruebas aprobadas; `alembic upgrade head --sql` → SQL válido para tablas `research_projects`, `papers` y `project_papers` e índices de artículos.
+- **Decisiones:** la primera migración cubre exclusivamente el núcleo que se implementará antes de IA y alertas; la deduplicación se protege por `openalex_id` y por la pareja proyecto–artículo.
+- **Riesgos/bloqueos:** Docker responde con permiso denegado para el socket local, por lo que falta verificar `upgrade` y `downgrade` contra PostgreSQL real.
+- **Próxima tarea (ID):** resolver acceso a Docker o ejecutar la migración sobre una instancia PostgreSQL local autorizada; después continuar con RFA-007.
+
 ## Plantilla para sesiones futuras
 ### AAAA-MM-DD — Sesión
 - Objetivo:
