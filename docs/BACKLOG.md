@@ -9,7 +9,7 @@
 | RFA-003 | P0 | Esqueleto de repo, entorno y CI | RFA-002 | App mínima y tests corren localmente | DONE |
 | RFA-004 | P0 | Adaptador OpenAlex con normalización | RFA-003 | Casos 200, timeout, 429, sin abstract cubiertos | DONE |
 | RFA-005 | P0 | GET /papers/search | RFA-004 | Contrato, filtros y paginación comprobados | DONE |
-| RFA-006 | P0 | Esquema y migraciones PostgreSQL | RFA-003 | Migración up/down verificada | IN_PROGRESS |
+| RFA-006 | P0 | Esquema y migraciones PostgreSQL | RFA-003 | Migración up/down verificada | DONE |
 | RFA-007 | P0 | Proyectos y artículos guardados | RFA-005/006 | CRUD y deduplicación testados | IN_PROGRESS |
 | RFA-008 | P0 | Interfaz buscar/guardar | RFA-005/007 | Flujo E2E navegable | IN_PROGRESS |
 | RFA-009 | P0 | Matriz editable y exportación CSV | RFA-007/008 | CSV con UTF-8, escape y celdas correctas | TODO |

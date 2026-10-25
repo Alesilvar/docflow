@@ -100,6 +100,14 @@
 - **Riesgos/bloqueos:** falta una base PostgreSQL funcional para conectar el botón de guardar y completar el flujo E2E.
 - **Próxima tarea (ID):** habilitar PostgreSQL local o resolver permisos de Docker; después conectar guardado y matriz.
 
+## 2026-10-25 — RFA-006: migración PostgreSQL verificada
+- **Objetivo:** completar la verificación del esquema contra PostgreSQL real.
+- **Cambios/archivos:** el contenedor local se aisló en el puerto `5434` para no interferir con una instancia PostgreSQL existente en `5432`; actualizadas las URLs de configuración.
+- **Evidencia y comandos de prueba:** migración aplicada, `downgrade base` y nueva aplicación a `20261025_01`; prueba transaccional real de crear proyecto y guardar artículo, revertida sin conservar datos.
+- **Decisiones:** PostgreSQL de ResearchFlow usa `localhost:5434`; RFA-006 queda completada.
+- **Riesgos/bloqueos:** RFA-007 sigue pendiente de listar y retirar artículos por proyecto, aunque la persistencia y deduplicación ya están verificadas.
+- **Próxima tarea (ID):** completar la API de artículos por proyecto y conectar el guardado desde la interfaz.
+
 ## Plantilla para sesiones futuras
 ### AAAA-MM-DD — Sesión
 - Objetivo:

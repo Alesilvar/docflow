@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: researchflow
       POSTGRES_PASSWORD: researchflow
     ports:
-      - "5432:5432"
+      - "5434:5432"
     volumes:
       - researchflow_postgres:/var/lib/postgresql/data
 
