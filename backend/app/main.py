@@ -3,6 +3,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.papers import router as papers_router
+
 app = FastAPI(
     title="ResearchFlow AI API",
     version="0.1.0",
@@ -16,6 +18,8 @@ app.add_middleware(
     allow_methods=["GET"],
     allow_headers=["*"],
 )
+
+app.include_router(papers_router)
 
 
 @app.get("/api/v1/health", tags=["system"])

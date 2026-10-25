@@ -29,12 +29,13 @@ Base path: `/api/v1`. Contratos sujetos a evolución antes del código.
     "source_url": "https://openalex.org/W0000000000"
   }],
   "page": 1,
-  "has_next": false
+  "has_next": false,
+  "total_count": 1
 }
 ```
 
 ## Errores y validaciones
-`400` consulta/filtros inválidos; `404` inexistente; `409` duplicado manejado; `429` límite de frecuencia; `502/503` dependencia upstream fallida; `500` error interno sin secretos. Usar respuestas JSON consistentes con `error.code`, `message`, `request_id`.
+`400` consulta/filtros inválidos; `404` inexistente; `409` duplicado manejado; `429` límite de frecuencia; `503` dependencia upstream no disponible; `504` timeout upstream; `500` error interno sin secretos. Usar respuestas JSON consistentes con `error.code`, `message`, `request_id`.
 
 ## Seguridad
 Proteger `/internal/*` con token o autenticación de servicio y mínimo privilegio. No exponer API keys ni configuración de proveedor al cliente.

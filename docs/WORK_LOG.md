@@ -63,6 +63,14 @@
 - **Riesgos/bloqueos:** una clave gratuita de OpenAlex podría ser necesaria antes de una demo con uso intensivo; no se almacena ni se solicita todavía.
 - **Próxima tarea (ID):** RFA-005 — endpoint `GET /papers/search`.
 
+## 2026-10-25 — RFA-005: endpoint de búsqueda
+- **Objetivo:** exponer la búsqueda OpenAlex a través de la API pública del MVP.
+- **Cambios/archivos:** añadido `app/api/papers.py`, ruta `GET /api/v1/papers/search`, modelos de respuesta y traducción controlada de errores OpenAlex.
+- **Evidencia y comandos de prueba:** `pytest -q` en `backend` → 8 pruebas aprobadas; llamada directa al endpoint con `query=climate change` y `per_page=1` → respuesta normalizada con resultado, abstract y paginación.
+- **Decisiones:** se validan consulta, años, página y tamaño de página; errores de parámetros, rate limit, timeout y upstream se devuelven con formato JSON y `request_id`.
+- **Riesgos/bloqueos:** la interfaz de búsqueda aún no consume el endpoint; OpenAlex sin clave mantiene una cuota compartida.
+- **Próxima tarea (ID):** RFA-006 — esquema y migraciones PostgreSQL.
+
 ## Plantilla para sesiones futuras
 ### AAAA-MM-DD — Sesión
 - Objetivo:

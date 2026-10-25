@@ -12,13 +12,13 @@ Aplicación web para descubrir, organizar y analizar literatura científica de d
 | Repositorio Git local | Inicializado; remoto configurado |
 | Backend y frontend | Base funcional creada |
 | Adaptador OpenAlex | Implementado y probado |
-| Endpoint de búsqueda | Pendiente de implementación |
+| Endpoint de búsqueda | Implementado y probado |
 | Base de datos, matriz y CSV | Pendientes de implementación |
 | IA y alertas | Extensiones opcionales, posteriores al núcleo |
 
 ### Siguiente hito
 
-Exponer el endpoint de búsqueda y sus validaciones de API. Consulta `docs/BACKLOG.md` (RFA-005) para el criterio de terminado.
+Diseñar el esquema PostgreSQL y sus migraciones. Consulta `docs/BACKLOG.md` (RFA-006) para el criterio de terminado.
 
 ## Ejecución local
 
@@ -38,7 +38,7 @@ cd backend
 ../.venv/bin/python -m uvicorn app.main:app --reload
 ```
 
-La API expone `GET /api/v1/health`. Para iniciar la interfaz, ejecutar `npm run dev` dentro de `frontend`.
+La API expone `GET /api/v1/health` y `GET /api/v1/papers/search?query=...`. Para iniciar la interfaz, ejecutar `npm run dev` dentro de `frontend`.
 
 ## Resultado demostrable
 
