@@ -1,7 +1,7 @@
 from datetime import datetime
 from uuid import UUID, uuid4
 
-from sqlalchemy import DateTime, ForeignKey, Integer, String, Text, UniqueConstraint, func
+from sqlalchemy import DateTime, ForeignKey, Integer, JSON, String, Text, UniqueConstraint, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
@@ -30,7 +30,7 @@ class Paper(Base):
     publication_year: Mapped[int | None] = mapped_column(Integer, nullable=True)
     landing_url: Mapped[str] = mapped_column(Text)
     abstract_text: Mapped[str | None] = mapped_column(Text, nullable=True)
-    source_payload: Mapped[dict] = mapped_column(JSONB, default=dict)
+    source_payload: Mapped[dict] = mapped_column(JSON().with_variant(JSONB, "postgresql"), default=dict)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 

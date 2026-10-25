@@ -79,6 +79,13 @@
 - **Riesgos/bloqueos:** Docker responde con permiso denegado para el socket local, por lo que falta verificar `upgrade` y `downgrade` contra PostgreSQL real.
 - **Próxima tarea (ID):** resolver acceso a Docker o ejecutar la migración sobre una instancia PostgreSQL local autorizada; después continuar con RFA-007.
 
+## 2026-10-25 — RFA-007: deduplicación de guardado en curso
+- **Objetivo:** preparar la lógica de proyectos y artículos antes de exponer el CRUD.
+- **Cambios/archivos:** añadido servicio de creación de proyectos y guardado de artículos; los modelos ahora permiten pruebas SQLite sin cambiar el tipo JSONB usado en PostgreSQL.
+- **Evidencia y comandos de prueba:** `pytest -q` en `backend` → 9 pruebas aprobadas; se comprueba un solo artículo global y dos asociaciones para dos proyectos.
+- **Riesgos/bloqueos:** faltan rutas HTTP y una base PostgreSQL real para cerrar la tarea.
+- **Próxima tarea (ID):** añadir rutas de proyectos y persistencia con sesión PostgreSQL.
+
 ## Plantilla para sesiones futuras
 ### AAAA-MM-DD — Sesión
 - Objetivo:
