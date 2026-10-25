@@ -86,6 +86,13 @@
 - **Riesgos/bloqueos:** faltan rutas HTTP y una base PostgreSQL real para cerrar la tarea.
 - **Próxima tarea (ID):** añadir rutas de proyectos y persistencia con sesión PostgreSQL.
 
+## 2026-10-25 — RFA-007: rutas de proyectos
+- **Objetivo:** exponer creación, listado y guardado idempotente mediante la API.
+- **Cambios/archivos:** añadidas sesión SQLAlchemy, rutas `POST/GET /api/v1/projects` y `POST /api/v1/projects/{project_id}/papers`.
+- **Evidencia y comandos de prueba:** `pytest -q` en `backend` → 10 pruebas aprobadas; las rutas están registradas en FastAPI.
+- **Riesgos/bloqueos:** las pruebas usan SQLite temporal; falta ejecutar estas rutas contra PostgreSQL para cerrar RFA-007 y RFA-006.
+- **Próxima tarea (ID):** obtener acceso al Docker local para aplicar la migración y validar persistencia real.
+
 ## Plantilla para sesiones futuras
 ### AAAA-MM-DD — Sesión
 - Objetivo:
