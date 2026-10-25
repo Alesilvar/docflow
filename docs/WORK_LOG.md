@@ -39,6 +39,14 @@
 - **Riesgos/bloqueos:** ninguno nuevo.
 - **Próxima tarea (ID):** RFA-003 — esqueleto de repositorio, entorno y CI.
 
+## 2026-10-25 — Flujo de control de versiones
+- **Objetivo:** conservar avances verificables en GitHub durante el desarrollo.
+- **Cambios/archivos:** actualizado `PROJECT_INSTRUCTIONS.md` con el flujo de commits y publicación remota.
+- **Evidencia y comandos de prueba:** commit inicial local creado: `65ffeca`.
+- **Decisiones:** realizar commits pequeños y descriptivos al finalizar avances relevantes; subirlos al remoto cuando estén listos.
+- **Riesgos/bloqueos:** la publicación remota requiere que GitHub acepte la autenticación de esta máquina.
+- **Próxima tarea (ID):** publicar el commit inicial y continuar con RFA-003.
+
 ## Plantilla para sesiones futuras
 ### AAAA-MM-DD — Sesión
 - Objetivo:

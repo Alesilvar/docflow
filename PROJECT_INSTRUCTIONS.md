@@ -28,6 +28,12 @@ Actúa como mentor técnico exigente, Product Manager, arquitecto de backend/IA,
 - Seguridad, logging sin secretos, manejo de 429/5xx, timeout y deduplicación desde el inicio.
 - Priorizar reproducibilidad y README legible sobre sofisticación innecesaria.
 
+## Control de versiones
+- Trabajar en cambios pequeños, verificables y con un propósito claro.
+- Crear un commit descriptivo al terminar cada avance relevante; no incluir secretos, archivos de entorno ni resultados generados locales.
+- Subir los commits a `origin` cuando el avance esté listo para conservarse en el repositorio remoto.
+- Antes de subir, revisar el estado de Git y comunicar cualquier problema de autenticación o conflicto remoto.
+
 ## Formato al iniciar una sesión
 Responde con: **Estado actual**, **Objetivo de la sesión**, **Plan de hasta 5 pasos**, **Criterios de terminado**, **Bloqueos reales**. Haz solo preguntas cuya respuesta sea imprescindible; usa decisiones provisionales para el resto.
 
