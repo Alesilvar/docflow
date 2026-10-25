@@ -55,6 +55,14 @@
 - **Riesgos/bloqueos:** ninguno para continuar. El entorno de ejecución aislado no permite comprobar una conexión HTTP entre procesos, aunque la aplicación inicia y la función de estado está probada.
 - **Próxima tarea (ID):** RFA-004 — adaptador OpenAlex con normalización.
 
+## 2026-10-25 — RFA-004: adaptador OpenAlex
+- **Objetivo:** aislar OpenAlex del resto de la aplicación y convertir su respuesta externa a un formato estable.
+- **Cambios/archivos:** añadido `app/integrations/openalex.py`, modelos internos de resultado, reconstrucción de `abstract_inverted_index`, validación de parámetros y pruebas de adaptación.
+- **Evidencia y comandos de prueba:** `pytest -q` en `backend` → 6 pruebas aprobadas; consulta mínima con `OpenAlexClient.search_works('climate change', per_page=1)` → artículo normalizado y abstract disponible.
+- **Decisiones:** búsqueda usa `search`, paginación `page`/`per-page` y filtros de fecha de publicación; se tratan 429, timeout y errores upstream como errores tipados. OpenAlex no requiere clave para el prototipo, pero su cuota compartida limita el uso sin clave.
+- **Riesgos/bloqueos:** una clave gratuita de OpenAlex podría ser necesaria antes de una demo con uso intensivo; no se almacena ni se solicita todavía.
+- **Próxima tarea (ID):** RFA-005 — endpoint `GET /papers/search`.
+
 ## Plantilla para sesiones futuras
 ### AAAA-MM-DD — Sesión
 - Objetivo:

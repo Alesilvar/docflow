@@ -11,13 +11,14 @@ Aplicación web para descubrir, organizar y analizar literatura científica de d
 | Plan, análisis y diseño | Listos |
 | Repositorio Git local | Inicializado; remoto configurado |
 | Backend y frontend | Base funcional creada |
-| Búsqueda OpenAlex | Pendiente de implementación |
+| Adaptador OpenAlex | Implementado y probado |
+| Endpoint de búsqueda | Pendiente de implementación |
 | Base de datos, matriz y CSV | Pendientes de implementación |
 | IA y alertas | Extensiones opcionales, posteriores al núcleo |
 
 ### Siguiente hito
 
-Implementar el adaptador de OpenAlex y el endpoint de búsqueda. Consulta `docs/BACKLOG.md` (RFA-004 y RFA-005) para los criterios de terminado.
+Exponer el endpoint de búsqueda y sus validaciones de API. Consulta `docs/BACKLOG.md` (RFA-005) para el criterio de terminado.
 
 ## Ejecución local
 
