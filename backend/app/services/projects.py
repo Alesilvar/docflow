@@ -57,3 +57,17 @@ def remove_paper_from_project(session: Session, project_id: UUID, paper_id: UUID
     session.delete(link)
     session.flush()
     return True
+
+
+def update_project_paper(session: Session, project_id: UUID, paper_id: UUID, *, notes: str | None = None, status: str | None = None) -> ProjectPaper | None:
+    if session.get(ResearchProject, project_id) is None:
+        raise ProjectNotFoundError
+    link = session.get(ProjectPaper, {"project_id": project_id, "paper_id": paper_id})
+    if link is None:
+        return None
+    if notes is not None:
+        link.notes = notes
+    if status is not None:
+        link.status = status
+    session.flush()
+    return link

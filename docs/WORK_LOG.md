@@ -115,6 +115,13 @@
 - **Riesgos/bloqueos:** falta una prueba E2E en navegador y la matriz editable/CSV para cerrar los criterios restantes.
 - **Próxima tarea (ID):** implementar la vista de matriz de literatura y exportación CSV (RFA-009).
 
+## 2026-10-25 — RFA-009: API de matriz en curso
+- **Objetivo:** permitir revisar, editar y exportar artículos guardados.
+- **Cambios/archivos:** añadidas rutas para listar artículos del proyecto, editar notas/estado, retirar artículos y exportar CSV UTF-8 con BOM.
+- **Evidencia y comandos de prueba:** `pytest -q` en `backend` → 10 pruebas aprobadas.
+- **Riesgos/bloqueos:** falta construir la vista de matriz en el frontend y realizar una comprobación de descarga en navegador.
+- **Próxima tarea (ID):** presentar la matriz y el enlace de exportación en la interfaz.
+
 ## Plantilla para sesiones futuras
 ### AAAA-MM-DD — Sesión
 - Objetivo:

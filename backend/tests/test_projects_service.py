@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.db.models import Base, Paper, ProjectPaper
 from app.integrations.openalex import PaperSearchItem
-from app.services.projects import create_project, list_project_papers, remove_paper_from_project, save_paper_to_project
+from app.services.projects import create_project, list_project_papers, remove_paper_from_project, save_paper_to_project, update_project_paper
 
 
 def test_project_save_is_idempotent_and_reuses_global_paper() -> None:
@@ -22,5 +22,7 @@ def test_project_save_is_idempotent_and_reuses_global_paper() -> None:
         assert session.query(Paper).count() == 1
         assert session.query(ProjectPaper).count() == 2
         assert [paper.title for paper in list_project_papers(session, first.id)] == ["Example"]
+        link = update_project_paper(session, first.id, paper.id, notes="Revisar", status="reviewed")
+        assert link is not None and link.notes == "Revisar" and link.status == "reviewed"
         assert remove_paper_from_project(session, first.id, paper.id) is True
         assert remove_paper_from_project(session, first.id, paper.id) is False
