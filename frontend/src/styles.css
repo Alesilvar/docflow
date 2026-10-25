@@ -8,10 +8,10 @@
 
 body { margin: 0; }
 
-main {
+.page {
   max-width: 760px;
   margin: 0 auto;
-  padding: 6rem 1.5rem;
+  padding: 5rem 1.5rem;
 }
 
 .eyebrow {
@@ -24,3 +24,19 @@ main {
 h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.08; }
 
 p { font-size: 1.05rem; line-height: 1.6; }
+
+.intro { max-width: 640px; }
+.search-form { margin: 3rem 0 1.5rem; }
+label { display: block; font-weight: 700; margin-bottom: .5rem; }
+.search-controls { display: flex; gap: .75rem; }
+input { border: 1px solid #99aaa5; border-radius: .5rem; flex: 1; font: inherit; padding: .8rem; }
+button { background: #176c5a; border: 0; border-radius: .5rem; color: white; cursor: pointer; font: inherit; font-weight: 700; padding: .8rem 1.1rem; }
+button:disabled { cursor: wait; opacity: .7; }
+.message { background: #e6eeea; border-radius: .5rem; padding: 1rem; }
+.error { background: #fbe6e4; color: #8d251d; }
+.results { display: grid; gap: 1rem; margin-top: 1.5rem; }
+.paper { background: white; border: 1px solid #d6e0db; border-radius: .75rem; padding: 1.25rem; }
+.paper h2 { font-size: 1.35rem; margin: .35rem 0; }
+.paper-meta { color: #4b5f58; font-size: .9rem; margin: 0; }
+.paper a { color: #176c5a; font-weight: 700; }
+@media (max-width: 600px) { .search-controls { flex-direction: column; } }

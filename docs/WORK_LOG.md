@@ -93,6 +93,13 @@
 - **Riesgos/bloqueos:** las pruebas usan SQLite temporal; falta ejecutar estas rutas contra PostgreSQL para cerrar RFA-007 y RFA-006.
 - **Próxima tarea (ID):** obtener acceso al Docker local para aplicar la migración y validar persistencia real.
 
+## 2026-10-25 — RFA-008: interfaz de búsqueda en curso
+- **Objetivo:** entregar una primera experiencia visible de búsqueda académica.
+- **Cambios/archivos:** el frontend ahora envía consultas al endpoint, muestra resultados, abstracts disponibles y estados de carga, vacío y error.
+- **Evidencia y comandos de prueba:** `npm run lint && npm run build` en `frontend` → correcto; `pytest -q` en `backend` → 10 pruebas aprobadas.
+- **Riesgos/bloqueos:** falta una base PostgreSQL funcional para conectar el botón de guardar y completar el flujo E2E.
+- **Próxima tarea (ID):** habilitar PostgreSQL local o resolver permisos de Docker; después conectar guardado y matriz.
+
 ## Plantilla para sesiones futuras
 ### AAAA-MM-DD — Sesión
 - Objetivo:
