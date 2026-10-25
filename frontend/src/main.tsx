@@ -16,6 +16,7 @@ type Paper = {
 type SearchResponse = { items: Paper[]; page: number; has_next: boolean; total_count: number | null };
 type ApiError = { error?: { message?: string } };
 type Project = { id: string; name: string; research_question: string | null };
+type SavedPaper = Paper & { id: string; notes: string | null; status: string };
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
 
@@ -27,10 +28,16 @@ function App() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProjectId, setSelectedProjectId] = useState("");
   const [projectName, setProjectName] = useState("");
+  const [savedPapers, setSavedPapers] = useState<SavedPaper[]>([]);
+  const [isMatrixLoading, setIsMatrixLoading] = useState(false);
 
   useEffect(() => {
     void loadProjects();
   }, []);
+
+  useEffect(() => {
+    void loadMatrix();
+  }, [selectedProjectId]);
 
   async function loadProjects() {
     try {
@@ -55,11 +62,39 @@ function App() {
     setProjectName("");
   }
 
+  async function loadMatrix() {
+    if (!selectedProjectId) { setSavedPapers([]); return; }
+    setIsMatrixLoading(true);
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/v1/projects/${selectedProjectId}/papers`);
+      if (!response.ok) throw new Error("No se pudo cargar la matriz del proyecto.");
+      setSavedPapers((await response.json()) as SavedPaper[]);
+    } catch (matrixError) {
+      setError(matrixError instanceof Error ? matrixError.message : "No se pudo cargar la matriz.");
+    } finally {
+      setIsMatrixLoading(false);
+    }
+  }
+
   async function savePaper(paper: Paper) {
     if (!selectedProjectId) { setError("Crea o selecciona un proyecto antes de guardar."); return; }
     const response = await fetch(`${apiBaseUrl}/api/v1/projects/${selectedProjectId}/papers`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(paper) });
     if (!response.ok) { setError("No se pudo guardar el artículo."); return; }
     setError(null);
+    await loadMatrix();
+  }
+
+  async function updatePaper(paper: SavedPaper, changes: Partial<Pick<SavedPaper, "notes" | "status">>) {
+    const response = await fetch(`${apiBaseUrl}/api/v1/projects/${selectedProjectId}/papers/${paper.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(changes) });
+    if (!response.ok) { setError("No se pudieron guardar los cambios de la matriz."); return; }
+    const updated = (await response.json()) as SavedPaper;
+    setSavedPapers((current) => current.map((entry) => entry.id === updated.id ? updated : entry));
+  }
+
+  async function removePaper(paper: SavedPaper) {
+    const response = await fetch(`${apiBaseUrl}/api/v1/projects/${selectedProjectId}/papers/${paper.id}`, { method: "DELETE" });
+    if (!response.ok) { setError("No se pudo retirar el artículo del proyecto."); return; }
+    setSavedPapers((current) => current.filter((entry) => entry.id !== paper.id));
   }
 
   async function search(event: FormEvent<HTMLFormElement>) {
@@ -123,6 +158,11 @@ function App() {
           </article>
         ))}
       </section>
+
+      {selectedProjectId && <section className="matrix" aria-label="Matriz de literatura">
+        <div className="matrix-heading"><div><p className="eyebrow">Matriz de literatura</p><h2>{projects.find((project) => project.id === selectedProjectId)?.name}</h2></div><a className="download" href={`${apiBaseUrl}/api/v1/projects/${selectedProjectId}/export.csv`}>Descargar CSV</a></div>
+        {isMatrixLoading ? <p className="message">Cargando matriz…</p> : savedPapers.length === 0 ? <p className="message">Guarda artículos para crear tu matriz.</p> : <div className="matrix-list">{savedPapers.map((paper) => <article className="matrix-row" key={paper.id}><div><a href={paper.source_url} target="_blank" rel="noreferrer">{paper.title}</a><small>{paper.year ?? "Sin año"}</small></div><label>Estado<select value={paper.status} onChange={(event) => void updatePaper(paper, { status: event.target.value })}><option value="saved">Guardado</option><option value="reviewing">En revisión</option><option value="reviewed">Revisado</option></select></label><label>Notas<textarea defaultValue={paper.notes ?? ""} onBlur={(event) => void updatePaper(paper, { notes: event.target.value })} placeholder="Tus notas…" /></label><button className="remove" type="button" onClick={() => void removePaper(paper)}>Quitar</button></article>)}</div>}
+      </section>}
     </main>
   );
 }

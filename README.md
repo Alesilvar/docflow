@@ -16,6 +16,7 @@ Aplicación web para descubrir, organizar y analizar literatura científica de d
 | API de proyectos y guardado | Implementada y verificada localmente |
 | PostgreSQL y migraciones | Configurados y verificados localmente |
 | Interfaz de búsqueda y guardado | Implementada |
+| Matriz editable y exportación CSV | Implementadas y verificadas |
 | Base de datos, matriz y CSV | Pendientes de implementación |
 | IA y alertas | Extensiones opcionales, posteriores al núcleo |
 

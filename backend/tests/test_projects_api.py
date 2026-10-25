@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
-from app.api.projects import ProjectCreateRequest, SavePaperRequest, create_project_route, list_projects, save_project_paper
+from app.api.projects import ProjectCreateRequest, SavePaperRequest, create_project_route, export_project_csv, list_projects, save_project_paper
 from app.db.models import Base
 
 
@@ -16,3 +16,6 @@ def test_project_routes_create_list_and_save_idempotently() -> None:
         duplicate = save_project_paper(project.id, payload, session)
         assert saved.saved is True
         assert duplicate.saved is False
+        export = export_project_csv(project.id, session)
+        assert export.media_type.startswith("text/csv")
+        assert export.body.decode("utf-8-sig").startswith("title,year,doi,source_url,status,notes,abstract")

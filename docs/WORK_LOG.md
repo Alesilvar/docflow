@@ -122,6 +122,14 @@
 - **Riesgos/bloqueos:** falta construir la vista de matriz en el frontend y realizar una comprobación de descarga en navegador.
 - **Próxima tarea (ID):** presentar la matriz y el enlace de exportación en la interfaz.
 
+## 2026-10-25 — RFA-009: matriz y CSV completados
+- **Objetivo:** cerrar el flujo de revisión bibliográfica y exportación.
+- **Cambios/archivos:** añadida matriz visible con edición de notas/estado, eliminación de artículos y enlace de descarga CSV; validada la exportación UTF-8 con BOM.
+- **Evidencia y comandos de prueba:** `pytest -q` en `backend` → 10 pruebas aprobadas; `npm run lint && npm run build` en `frontend` → correcto.
+- **Decisiones:** RFA-009 se completa. El núcleo demostrable de búsqueda → proyecto → matriz → CSV está implementado.
+- **Riesgos/bloqueos:** falta una prueba E2E manual en navegador; IA y alertas siguen fuera del núcleo entregado.
+- **Próxima tarea (ID):** RFA-010 — spike de IA gratuita y fallback manual, o bien QA de la demo núcleo.
+
 ## Plantilla para sesiones futuras
 ### AAAA-MM-DD — Sesión
 - Objetivo:
