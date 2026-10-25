@@ -6,7 +6,7 @@
 |---|---|---|---|---|---|
 | RFA-001 | P2 | Entrevistas y comparación de 3 soluciones | — | Problema, perfil y hallazgos documentados | TODO |
 | RFA-002 | P0 | Cerrar criterios de éxito MVP de portafolio | — | PRD y alcance técnico aprobados | DONE |
-| RFA-003 | P0 | Esqueleto de repo, entorno y CI | RFA-002 | App mínima y tests corren localmente | TODO |
+| RFA-003 | P0 | Esqueleto de repo, entorno y CI | RFA-002 | App mínima y tests corren localmente | DONE |
 | RFA-004 | P0 | Adaptador OpenAlex con normalización | RFA-003 | Casos 200, timeout, 429, sin abstract cubiertos | TODO |
 | RFA-005 | P0 | GET /papers/search | RFA-004 | Contrato, filtros y paginación comprobados | TODO |
 | RFA-006 | P0 | Esquema y migraciones PostgreSQL | RFA-003 | Migración up/down verificada | TODO |

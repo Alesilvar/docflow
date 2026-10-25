@@ -2,7 +2,7 @@
 
 Aplicación web para descubrir, organizar y analizar literatura científica de distintas disciplinas. Está diseñada como un proyecto de portafolio con una demostración local, reproducible y honesta sobre sus límites.
 
-> **Estado:** Sprint 1 — preparación técnica. **Prioridad:** portafolio profesional. **Dedicación:** 10–12 h/semana. **Presupuesto:** S/ 0. **Última actualización:** 2026-10-25.
+> **Estado:** Sprint 1 — base técnica lista. **Prioridad:** portafolio profesional. **Dedicación:** 10–12 h/semana. **Presupuesto:** S/ 0. **Última actualización:** 2026-10-25.
 
 ## Estado del proyecto
 
@@ -10,14 +10,34 @@ Aplicación web para descubrir, organizar y analizar literatura científica de d
 |---|---|
 | Plan, análisis y diseño | Listos |
 | Repositorio Git local | Inicializado; remoto configurado |
-| Backend y frontend | Pendientes de implementación |
+| Backend y frontend | Base funcional creada |
 | Búsqueda OpenAlex | Pendiente de implementación |
 | Base de datos, matriz y CSV | Pendientes de implementación |
 | IA y alertas | Extensiones opcionales, posteriores al núcleo |
 
 ### Siguiente hito
 
-Crear la estructura ejecutable del backend y frontend, configurar pruebas mínimas y exponer una ruta de estado de la API. Consulta `docs/BACKLOG.md` (RFA-003) para el criterio de terminado.
+Implementar el adaptador de OpenAlex y el endpoint de búsqueda. Consulta `docs/BACKLOG.md` (RFA-004 y RFA-005) para los criterios de terminado.
+
+## Ejecución local
+
+Requisitos: Python 3.12+ y Node.js 24+.
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -e './backend[dev]'
+cd frontend && npm ci
+```
+
+Para comprobar el backend:
+
+```bash
+cd backend
+../.venv/bin/python -m pytest -q
+../.venv/bin/python -m uvicorn app.main:app --reload
+```
+
+La API expone `GET /api/v1/health`. Para iniciar la interfaz, ejecutar `npm run dev` dentro de `frontend`.
 
 ## Resultado demostrable
 

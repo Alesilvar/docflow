@@ -1,0 +1,24 @@
+"""FastAPI application entry point."""
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI(
+    title="ResearchFlow AI API",
+    version="0.1.0",
+    description="API for the ResearchFlow AI literature-review workflow.",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=False,
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
+
+
+@app.get("/api/v1/health", tags=["system"])
+def health_check() -> dict[str, str]:
+    """Return a lightweight status response for local checks and CI."""
+    return {"status": "ok", "service": "researchflow-api"}

@@ -47,6 +47,14 @@
 - **Riesgos/bloqueos:** la publicación remota requiere que GitHub acepte la autenticación de esta máquina.
 - **Próxima tarea (ID):** publicar el commit inicial y continuar con RFA-003.
 
+## 2026-10-25 — RFA-003: base técnica y CI
+- **Objetivo:** crear una aplicación mínima ejecutable que permita comenzar el desarrollo vertical.
+- **Cambios/archivos:** añadido backend FastAPI con `GET /api/v1/health`, prueba de estado, frontend React/TypeScript con Vite, `.env.example`, configuración de CI y guía de ejecución en `README.md`.
+- **Evidencia y comandos de prueba:** `pytest -q` en `backend` → 1 prueba aprobada; `npm run lint && npm run build` en `frontend` → correcto.
+- **Decisiones:** dependencias de backend acotadas a FastAPI 0.115.x y Uvicorn 0.32.x por compatibilidad de pruebas; el endpoint HTTP se probará de forma integral al añadir la siguiente integración.
+- **Riesgos/bloqueos:** ninguno para continuar. El entorno de ejecución aislado no permite comprobar una conexión HTTP entre procesos, aunque la aplicación inicia y la función de estado está probada.
+- **Próxima tarea (ID):** RFA-004 — adaptador OpenAlex con normalización.
+
 ## Plantilla para sesiones futuras
 ### AAAA-MM-DD — Sesión
 - Objetivo:
