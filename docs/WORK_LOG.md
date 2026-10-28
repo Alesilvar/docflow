@@ -130,6 +130,14 @@
 - **Riesgos/bloqueos:** falta una prueba E2E manual en navegador; IA y alertas siguen fuera del núcleo entregado.
 - **Próxima tarea (ID):** RFA-010 — spike de IA gratuita y fallback manual, o bien QA de la demo núcleo.
 
+## 2026-10-28 — Corrección de acceso local desde la interfaz
+- **Objetivo:** eliminar el error de red mostrado al buscar desde la dirección local `127.0.0.1`.
+- **Cambios/archivos:** ajustada la política CORS de la API para aceptar tanto `localhost:5173` como `127.0.0.1:5173`, incluyendo las operaciones `PATCH` y `DELETE` usadas por la matriz.
+- **Evidencia y comandos de prueba:** `pytest -q` en `backend` → 10 pruebas aprobadas; búsqueda manual de “inteligencia artificial” en la interfaz → resultados de OpenAlex visibles, sin el mensaje “Failed to fetch”.
+- **Decisiones:** se mantienen ambos orígenes únicamente para desarrollo local; producción deberá definir su URL publicada de forma explícita.
+- **Riesgos/bloqueos:** los servidores de desarrollo se detienen al cerrar la sesión; para ver la demo se deben iniciar la API y la interfaz locales.
+- **Próxima tarea (ID):** RFA-010 — QA de la demo núcleo y configuración de despliegue para portafolio.
+
 ## Plantilla para sesiones futuras
 ### AAAA-MM-DD — Sesión
 - Objetivo:
